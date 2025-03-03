@@ -1,56 +1,63 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const categories = [
+    "Fiction",
+    "Mystery",
+    "Thriller",
+    "Romance",
+    "Fantasy",
+    "Morality",
+    "Society",
+    "Power",
+    "Justice",
+    "Adventure",
+    "Tragedy",
+    "War",
+    "Philosophy",
+  ];
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/?search=${encodeURIComponent(searchTerm)}`);
+    if (searchTerm.trim()) {
+      navigate(`/?search=${encodeURIComponent(searchTerm)}`);
+    }
   };
-
-  const categories = [
-    "fiction",
-    "mystery",
-    "thriller",
-    "romance",
-    "fantasy",
-    "morality",
-    "society",
-    "power",
-    "justice",
-    "adventure",
-    "tragedy",
-    "war",
-    "philosophy",
-  ];
 
   return (
     <header className="header">
-      <div className="header-top">
-        <div className="logo">
-          <Link to="/">Hector`s Book Haven</Link>
+      <div className="logo">
+        <Link to="/">Hector's Book Haven</Link>
+      </div>
+
+      <form onSubmit={handleSearch} className="search-form">
+        <input
+          type="text"
+          placeholder="Search for books..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <nav className="nav">
+        <div className="dropdown">
+          <button className="dropdown-btn">Categories</button>
+          <div className="dropdown-content">
+            {categories.map((category) => (
+              <Link key={category} to={`/category/${category.toLowerCase()}`}>
+                {category}
+              </Link>
+            ))}
+          </div>
         </div>
-        <form className="search-form" onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
         <Link to="/favorites" className="favorites-link">
           Favorites
         </Link>
-      </div>
-      <nav className="category-menu">
-        {categories.map((category) => (
-          <Link key={category} to={`/category/${category}`}>
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </Link>
-        ))}
       </nav>
     </header>
   );
