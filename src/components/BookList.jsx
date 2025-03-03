@@ -9,15 +9,16 @@ export default function BookList() {
   const [hasMore, setHasMore] = useState(true);
 
   const location = useLocation();
-  const searchTerm = new URLSearchParams(location.search).get("search") || "";
+  const searchParams = new URLSearchParams(location.search);
+  const searchTerm = searchParams.get("search") || "";
 
   useEffect(() => {
     const fetchBooks = async () => {
       setLoading(true);
       try {
-        const url = `https://gutendex.com/books/?page=${page}&search=${encodeURIComponent(
-          searchTerm
-        )}`;
+        let url = `https://gutendex.com/books/?page=${page}`;
+        if (searchTerm) url += `&search=${encodeURIComponent(searchTerm)}`;
+
         const response = await fetch(url);
         const data = await response.json();
 
@@ -35,13 +36,10 @@ export default function BookList() {
     fetchBooks();
   }, [page, searchTerm]);
 
-  const loadMore = () => setPage((p) => p + 1);
-
   return (
     <div className="book-list">
-      <h2>
-        {searchTerm ? `Search Results for: ${searchTerm}` : "Explore Books"}
-      </h2>
+      {searchTerm && <h2>Search Results for: {searchTerm}</h2>}
+      {!searchTerm && <h2>Explore Books</h2>}
 
       {error && <div className="error-message">{error}</div>}
 
@@ -53,11 +51,10 @@ export default function BookList() {
                 src={book.formats["image/jpeg"]}
                 alt={`Cover for ${book.title}`}
                 className="book-cover"
-                loading="lazy"
               />
             )}
             <h3 className="book-title">{book.title}</h3>
-            {book.authors[0] && (
+            {book.authors.length > 0 && (
               <p className="book-author">{book.authors[0].name}</p>
             )}
           </Link>
@@ -65,23 +62,16 @@ export default function BookList() {
       </div>
 
       {loading && <div className="loading">Loading books...</div>}
-
-      {!loading && (
-        <>
-          {hasMore && books.length > 0 && (
-            <button onClick={loadMore} className="load-more">
-              Load More Books
-            </button>
-          )}
-          {!hasMore && books.length > 0 && (
-            <p className="no-more">No more books to load</p>
-          )}
-          {books.length === 0 && (
-            <p className="no-results">
-              No books found. Try a different search.
-            </p>
-          )}
-        </>
+      {hasMore && !loading && (
+        <button onClick={() => setPage((p) => p + 1)} className="load-more">
+          Load More Books
+        </button>
+      )}
+      {!hasMore && books.length > 0 && (
+        <p className="no-more">No more books to load</p>
+      )}
+      {!loading && books.length === 0 && (
+        <p className="no-results">No books found. Try a different search.</p>
       )}
     </div>
   );
