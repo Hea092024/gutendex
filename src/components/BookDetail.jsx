@@ -6,10 +6,12 @@ export default function BookDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+
   const { id } = useParams();
 
   useEffect(() => {
     const fetchBook = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`https://gutendex.com/books/${id}`);
         const data = await response.json();
@@ -33,10 +35,9 @@ export default function BookDetail() {
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
     if (isFavorite) {
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify(favorites.filter((fav) => fav.id !== book.id))
-      );
+      const updatedFavorites = favorites.filter((fav) => fav.id !== book.id);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      setIsFavorite(false);
     } else {
       const bookToSave = {
         id: book.id,
@@ -49,8 +50,8 @@ export default function BookDetail() {
         "favorites",
         JSON.stringify([...favorites, bookToSave])
       );
+      setIsFavorite(true);
     }
-    setIsFavorite(!isFavorite);
   };
 
   if (loading) return <div className="loading">Loading book details...</div>;
@@ -84,7 +85,7 @@ export default function BookDetail() {
             <strong>Downloads:</strong> {book.download_count.toLocaleString()}
           </p>
 
-          {book.subjects?.length > 0 && (
+          {book.subjects && book.subjects.length > 0 && (
             <div className="book-categories">
               <strong>Categories:</strong>
               <ul>
@@ -95,7 +96,7 @@ export default function BookDetail() {
             </div>
           )}
 
-          {book.languages?.length > 0 && (
+          {book.languages && book.languages.length > 0 && (
             <p className="book-language">
               <strong>Language:</strong>{" "}
               {book.languages.map((lang) => lang.toUpperCase()).join(", ")}
@@ -105,23 +106,41 @@ export default function BookDetail() {
           <div className="book-links">
             <strong>Read Book:</strong>
             <div className="format-links">
-              {Object.entries({
-                HTML: book.formats["text/html"],
-                EPUB: book.formats["application/epub+zip"],
-                "Plain Text": book.formats["text/plain"],
-                PDF: book.formats["application/pdf"],
-              }).map(
-                ([format, url]) =>
-                  url && (
-                    <a
-                      key={format}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {format}
-                    </a>
-                  )
+              {book.formats["text/html"] && (
+                <a
+                  href={book.formats["text/html"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  HTML
+                </a>
+              )}
+              {book.formats["application/epub+zip"] && (
+                <a
+                  href={book.formats["application/epub+zip"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  EPUB
+                </a>
+              )}
+              {book.formats["text/plain"] && (
+                <a
+                  href={book.formats["text/plain"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Plain Text
+                </a>
+              )}
+              {book.formats["application/pdf"] && (
+                <a
+                  href={book.formats["application/pdf"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  PDF
+                </a>
               )}
             </div>
           </div>
