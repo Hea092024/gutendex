@@ -70,3 +70,32 @@ button:hover {
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 50px;
 }
+
+.book-card, .favorite-book-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: #333;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+h2 {
+  margin: 20px 0;
+  font-size: 30px;
+  color: #333;
+}
+
