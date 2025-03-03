@@ -123,6 +123,21 @@ button:hover {
   overflow-y: auto;
 }
 
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.favorites-link {
+  background-color: #0066cc;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
 .books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
