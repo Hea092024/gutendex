@@ -1,7 +1,7 @@
-export default function Header() {
+export default function Category() {
     return (
         <>
-            <h1>Header</h1>
+            <h1>Category</h1>
         </>
     )
 }
