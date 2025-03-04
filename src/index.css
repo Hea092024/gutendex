@@ -183,3 +183,12 @@ h2 {
   color: #666;
   margin: 0 10px 10px;
 }
+
+.loading, .error-message, .no-results, .no-more, .no-favorites {
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
