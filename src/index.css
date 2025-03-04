@@ -177,3 +177,9 @@ h2 {
   margin: 10px;
   flex: 1;
 }
+
+.book-author {
+  font-size: 14px;
+  color: #666;
+  margin: 0 10px 10px;
+}
