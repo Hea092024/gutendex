@@ -304,3 +304,129 @@ button:hover {
   margin-top: 10px;
   font-weight: bold;
 }
+
+/* Media Queries for responsiveness for smaller screens */
+
+@media (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    padding: 10px;
+    align-items: stretch;
+  }
+
+  .logo {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .logo a {
+    font-size: 20px;
+  }
+
+  .search-form {
+    flex: 1;
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+
+  .search-form input {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .search-form button {
+    padding: 10px 16px;
+    font-size: 16px;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .dropdown {
+    margin-right: 0;
+  }
+
+  .dropdown-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .dropdown-content {
+    width: 100%;
+  }
+
+  .favorites-link {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .book-title {
+    font-size: 14px;
+  }
+
+  .book-author {
+    font-size: 12px;
+  }
+
+  .book-detail {
+    padding: 15px;
+  }
+
+  .book-info {
+    flex-direction: column;
+  }
+
+  .book-cover-container {
+    flex: 0 0 auto;
+    margin-bottom: 15px;
+  }
+
+  .book-cover-large {
+    max-width: 100%;
+  }
+
+  .book-text {
+    padding-left: 0;
+  }
+
+  .book-title {
+    font-size: 20px;
+  }
+
+  .book-author, .book-downloads, .book-categories, .book-language, .book-links {
+    font-size: 14px;
+  }
+
+  .format-links a {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .favorite-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .loading, .error-message, .no-results, .no-more, .no-favorites {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .load-more {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
