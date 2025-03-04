@@ -250,3 +250,11 @@ h2 {
   flex-wrap: wrap;
   gap: 10px;
 }
+
+.format-links a {
+  display: inline-block;
+  background: #0066cc;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
