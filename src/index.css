@@ -202,3 +202,51 @@ h2 {
   margin: 20px auto;
   padding: 10px 20px;
 }
+
+.book-detail {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.book-cover-large {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.book-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.book-author, .book-downloads, .book-categories, .book-language, .book-links {
+  margin-bottom: 15px;
+}
+
+.book-categories ul {
+  list-style: none;
+  margin-top: 5px;
+}
+
+.book-categories li {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 3px 8px;
+  margin: 2px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.format-links {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
